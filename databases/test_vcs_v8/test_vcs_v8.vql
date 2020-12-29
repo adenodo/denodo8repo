@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE DATABASE test_vcs_v8 'Testing VCS in github';
+
+ALTER DATABASE test_vcs_v8
+  CHARSET DEFAULT;
+

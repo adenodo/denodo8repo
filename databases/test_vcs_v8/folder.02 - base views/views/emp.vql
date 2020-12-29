@@ -1,0 +1,54 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC emp
+    FOLDER = '/02 - base views'
+    DATASOURCENAME=ds_oc_adw
+    SCHEMANAME='${databases.test_vcs_v8.folder.02 - base views.views.jdbc.emp.SCHEMANAME}' 
+    RELATIONNAME='EMP' 
+    OUTPUTSCHEMA (
+        empno = 'EMPNO' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='4', sourcetypeid='2', sourcetypename='NUMBER')  NOT NULL SORTABLE,
+        ename = 'ENAME' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='10', sourcetypeid='12', sourcetypename='VARCHAR2')  NOT NULL SORTABLE,
+        job = 'JOB' :'java.lang.String' (OPT) (sourcetyperadix='10', sourcetypesize='9', sourcetypeid='12', sourcetypename='VARCHAR2')  SORTABLE,
+        mgr = 'MGR' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='4', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        hiredate = 'HIREDATE' :'java.time.LocalDateTime' (OPT) (sourcetyperadix='10', sourcetypesize='7', sourcetypeid='93', sourcetypename='DATE')  SORTABLE,
+        sal = 'SAL' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='7', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        comm = 'COMM' :'java.math.BigDecimal' (OPT) (sourcetypedecimals='2', sourcetyperadix='10', sourcetypesize='7', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE,
+        deptno = 'DEPTNO' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='2', sourcetypeid='2', sourcetypename='NUMBER')  SORTABLE
+    )
+    CONSTRAINT 'PK_EMP' PRIMARY KEY ( 'EMPNO' )
+    CONSTRAINT 'FK_DEPTNO' FOREIGN KEY ( 'DEPTNO' ) 
+    REFERENCES 'SCOTT'.'DEPT'( 'DEPTNO' )  ON DELETE RESTRICT NOT DEFERRABLE 
+    INDEX 'PK_EMP' CLUSTER UNIQUE PRIMARY ( 'EMPNO' );
+
+CREATE OR REPLACE TABLE emp I18N au_est (
+        empno:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '4'),
+        ename:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '10'),
+        job:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypesize = '9'),
+        mgr:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '4'),
+        hiredate:timestamp (sourcetypeid = '93', sourcetyperadix = '10', sourcetypesize = '7'),
+        sal:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '7'),
+        comm:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '7'),
+        deptno:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '2')
+    )
+    FOLDER = '/02 - base views'
+    PRIMARY KEY ( 'empno' )
+    CACHE OFF
+    BATCHSIZEINCACHE DEFAULT
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD emp(
+        I18N au_est
+        CONSTRAINTS (
+             ADD empno (any) OPT ANY
+             ADD ename (any) OPT ANY
+             ADD job (any) OPT ANY
+             ADD mgr (any) OPT ANY
+             ADD hiredate (any) OPT ANY
+             ADD sal (any) OPT ANY
+             ADD comm (any) OPT ANY
+             ADD deptno (any) OPT ANY
+        )
+        OUTPUTLIST (comm, deptno, empno, ename, hiredate, job, mgr, sal
+        )
+        WRAPPER (jdbc emp)
+    )
+    SMART_ONLY;
+

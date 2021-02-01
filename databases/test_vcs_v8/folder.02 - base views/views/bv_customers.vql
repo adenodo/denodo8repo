@@ -1,8 +1,8 @@
 ﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
 CREATE OR REPLACE WRAPPER JDBC bv_customers
-    FOLDER = '/01 - data sources'
+    FOLDER = '/02 - base views'
     DATASOURCENAME=ds_mysql_remote
-    CATALOGNAME='${databases.test_vcs_v8.folder.01 - data sources.views.jdbc.bv_customers.CATALOGNAME}' 
+    CATALOGNAME='${databases.test_vcs_v8.folder.02 - base views.views.jdbc.bv_customers.CATALOGNAME}' 
     RELATIONNAME='customers' 
     OUTPUTSCHEMA (
         customernumber = 'customerNumber' :'java.lang.Integer' (OPT) (sourcetyperadix='10', sourcetypesize='10', description='', sourcetypeid='4', sourcetypename='INT')  NOT NULL SORTABLE,
@@ -40,7 +40,7 @@ CREATE OR REPLACE TABLE bv_customers I18N au_est (
         salesrepemployeenumber:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypesize = '10', description = ''),
         creditlimit:decimal (sourcetypeid = '3', sourcetyperadix = '10', sourcetypedecimals = '2', sourcetypesize = '10', description = '')
     )
-    FOLDER = '/01 - data sources'
+    FOLDER = '/02 - base views'
     CONSTRAINT 'PRIMARY' PRIMARY KEY ( 'customernumber' )
     CACHE OFF
     TIMETOLIVEINCACHE DEFAULT

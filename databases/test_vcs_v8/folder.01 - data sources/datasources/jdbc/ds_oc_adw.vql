@@ -5,12 +5,12 @@ CREATE OR REPLACE DATASOURCE JDBC ds_oc_adw
     DATABASEURI = '${databases.test_vcs_v8.folder.01 - data sources.datasources.jdbc.ds_oc_adw.DATABASEURI}'
     USERNAME = '${databases.test_vcs_v8.folder.01 - data sources.datasources.jdbc.ds_oc_adw.USERNAME}'
     USERPASSWORD = '${databases.test_vcs_v8.folder.01 - data sources.datasources.jdbc.ds_oc_adw.USERPASSWORD}' ${databases.test_vcs_v8.folder.01 - data sources.datasources.jdbc.ds_oc_adw.USERPASSWORD.ENCRYPTED}
-    CLASSPATH = 'oracle-18c'
+    CLASSPATH = 'oracle-19c'
     DATABASENAME = 'oracle'
-    DATABASEVERSION = '18c'
+    DATABASEVERSION = '19c'
     FETCHSIZE = 1000
     VALIDATIONQUERY = 'SELECT COUNT(*) FROM SYS.DUAL'
-    INITIALSIZE = 3
+    INITIALSIZE = 4
     MAXIDLE = -1
     MINIDLE = 0
     MAXACTIVE = 20
@@ -25,10 +25,8 @@ CREATE OR REPLACE DATASOURCE JDBC ds_oc_adw
     MAXOPENPREPAREDSTATEMENTS = -1
     PROPERTIES ('includeSynonyms'='false', 'remarksReporting'='false')
     DATA_LOAD_CONFIGURATION (
-        USE_FOR_QUERY_OPTIMIZATION = DATA_MOVEMENT
         BATCHINSERTSIZE = 200
     )
-    DESCRIPTION  = 'XrIU9lc2UuoN'
     SOURCECONFIGURATION (
         delegatescalarfunctionslist = (abs, acos, addday, addhour, addminute, addmonth, addsecond, addweek, addyear, ascii, asin, atan, atan2, case, cast, ceil, char, coalesce, concat, cos, cot, current_date, degrees, div, exp, firstdayofmonth, firstdayofweek, floor, formatdate, getday, getdayofweek, getdayofyear, getdaysbetween, gethour, getmicrosecond, getmillisecond, getminute, getmonth, getmonthsbetween, getnanosecond, getquarter, getsecond, gettimeinmillis, getweek, getyear, instr, lastdayofmonth, lastdayofweek, len, ln, log, lower, ltrim, max, min, mod, mult, nextweekday, now, nullif, pi, position, pow, power, previousweekday, radians, regexp, removeaccents, repeat, replace, round, rownum, rtrim, sign, sin, sql_trim, sqrt, substr, substring, subtract, sum, tan, textcat, textconstant, to_date, to_interval_day_second, to_interval_year_month, to_localdate, to_timestamp, to_timestamptz, trim, trunc, upper, xmlquery, xpath)
     );

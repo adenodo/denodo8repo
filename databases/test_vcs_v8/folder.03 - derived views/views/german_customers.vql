@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW german_customers FOLDER = '/03 - derived views' AS SELECT bv_customers.customernumber AS customernumber, bv_customers.customername AS customername, bv_customers.contactlastname AS contactlastname, bv_customers.contactfirstname AS contactfirstname, bv_customers.phone AS phone, bv_customers.addressline1 AS addressline1, bv_customers.addressline2 AS addressline2, bv_customers.city AS city, bv_customers.state AS state, bv_customers.postalcode AS postalcode, bv_customers.country AS country, bv_customers.salesrepemployeenumber AS salesrepemployeenumber, bv_customers.creditlimit AS creditlimit FROM bv_customers WHERE country = 'Gernamy';
+
+ALTER VIEW german_customers
+ LAYOUT (bv_customers = [20, 20, 291, 285]);
+

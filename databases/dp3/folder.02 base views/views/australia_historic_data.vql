@@ -1,0 +1,56 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE WRAPPER JDBC australia_historic_data
+    FOLDER = '/02 base views'
+    DATASOURCENAME=ds_covid_19
+    SCHEMANAME='${databases.dp3.folder.02 base views.views.jdbc.australia_historic_data.SCHEMANAME}' 
+    RELATIONNAME='australia_historic_data' 
+    OUTPUTSCHEMA (
+        date = 'date' :'java.time.LocalDate' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='7', sourcetypeid='91', sourcetypename='DATE')  ESCAPE SORTABLE,
+        country_name = 'country_name' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='65536', sourcetypeid='12', sourcetypename='VARCHAR')  SORTABLE,
+        day = 'day' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='INTEGER')  ESCAPE SORTABLE,
+        month = 'month' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='INTEGER')  ESCAPE SORTABLE,
+        year = 'year' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='INTEGER')  ESCAPE SORTABLE,
+        cases = 'cases' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='INTEGER')  SORTABLE,
+        deaths = 'deaths' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='INTEGER')  SORTABLE,
+        country_iso = 'country_iso' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='65536', sourcetypeid='12', sourcetypename='VARCHAR')  SORTABLE,
+        country_territory_code = 'country_territory_code' :'java.lang.String' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='65536', sourcetypeid='12', sourcetypename='VARCHAR')  SORTABLE,
+        population_as_of_2018 = 'population_as_of_2018' :'java.lang.Integer' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='10', sourcetypeid='4', sourcetypename='INTEGER')  SORTABLE,
+        last_update = 'last_update' :'java.time.LocalDate' (OPT) (sourcetypedecimals='0', sourcetyperadix='10', sourcetypesize='7', sourcetypeid='91', sourcetypename='DATE')  SORTABLE
+    );
+
+CREATE OR REPLACE TABLE australia_historic_data I18N us_pst (
+        date:localdate (sourcetypeid = '91', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '7'),
+        country_name:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '65536'),
+        day:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        month:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        year:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        cases:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        deaths:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        country_iso:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '65536'),
+        country_territory_code:text (sourcetypeid = '12', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '65536'),
+        population_as_of_2018:int (sourcetypeid = '4', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '10'),
+        last_update:localdate (sourcetypeid = '91', sourcetyperadix = '10', sourcetypedecimals = '0', sourcetypesize = '7')
+    )
+    FOLDER = '/02 base views'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD australia_historic_data(
+        I18N us_pst
+        CONSTRAINTS (
+             ADD date (any) OPT ANY
+             ADD country_name (any) OPT ANY
+             ADD day (any) OPT ANY
+             ADD month (any) OPT ANY
+             ADD year (any) OPT ANY
+             ADD cases (any) OPT ANY
+             ADD deaths (any) OPT ANY
+             ADD country_iso (any) OPT ANY
+             ADD country_territory_code (any) OPT ANY
+             ADD population_as_of_2018 (any) OPT ANY
+             ADD last_update (any) OPT ANY
+        )
+        OUTPUTLIST (cases, country_iso, country_name, country_territory_code, date, day, deaths, last_update, month, population_as_of_2018, year
+        )
+        WRAPPER (jdbc australia_historic_data)
+    );
+

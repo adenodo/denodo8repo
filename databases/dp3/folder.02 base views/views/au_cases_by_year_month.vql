@@ -1,5 +1,0 @@
-﻿CREATE OR REPLACE VIEW au_cases_by_year_month FOLDER = '/02 base views' AS SELECT year AS year, sum(cases) AS cases FROM australia_historic_data GROUP BY year;
-
-ALTER VIEW au_cases_by_year_month
- LAYOUT (australia_historic_data = [20, 20, 249, 245]);
-

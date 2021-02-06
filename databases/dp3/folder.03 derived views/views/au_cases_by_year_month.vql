@@ -1,0 +1,5 @@
+﻿CREATE OR REPLACE VIEW au_cases_by_year_month FOLDER = '/03 derived views' DESCRIPTION = 'Cases and deaths by month'  AS SELECT year AS year, month AS month, sum(cases) AS cases, sum(deaths) AS deaths FROM australia_historic_data GROUP BY year, month;
+
+ALTER VIEW au_cases_by_year_month
+ LAYOUT (australia_historic_data = [20, 20, 249, 245]);
+

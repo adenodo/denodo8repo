@@ -1,4 +1,4 @@
-﻿CREATE OR REPLACE VIEW dv_emp_a FOLDER = '/02_derived_vuews' AS SELECT ds_emp.empno AS empno, ds_emp.ename AS ename, ds_emp.job AS job, ds_emp.mgr AS mgr, ds_emp.hiredate AS hiredate, ds_emp.sal AS sal, ds_emp.comm AS comm, ds_emp.deptno AS deptno FROM ds_emp WHERE ename like 'A%';
+﻿CREATE OR REPLACE VIEW dv_emp_a FOLDER = '/02_derived_vuews' DESCRIPTION = 'Employees stating with A'  AS SELECT ds_emp.empno AS empno, ds_emp.ename AS ename, ds_emp.job AS job, ds_emp.mgr AS mgr, ds_emp.hiredate AS hiredate, ds_emp.sal AS sal, ds_emp.comm AS comm, ds_emp.deptno AS deptno FROM ds_emp WHERE ename like 'A%';
 
 ALTER VIEW dv_emp_a
  LAYOUT (ds_emp = [20, 20, 200, 185]);

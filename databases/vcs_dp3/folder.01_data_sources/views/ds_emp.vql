@@ -1,0 +1,44 @@
+﻿CREATE OR REPLACE WRAPPER DF ds_emp
+    FOLDER = '/01_data_sources'
+    DATASOURCENAME=ds_emp
+    OUTPUTSCHEMA (
+        empno = '"EMPNO"' (OPT),
+        ename = '"ENAME"' (OPT),
+        job = '"JOB"' (OPT),
+        mgr = '"MGR"' (OPT),
+        hiredate = '"HIREDATE"' (OPT),
+        sal = '"SAL"' (OPT),
+        comm = '"COMM"' (OPT),
+        deptno = '"DEPTNO"' (OPT)
+    );
+
+CREATE OR REPLACE TABLE ds_emp I18N au_est (
+        empno:int,
+        ename:text,
+        job:text,
+        mgr:int,
+        hiredate:localdate,
+        sal:decimal,
+        comm:decimal,
+        deptno:int
+    )
+    FOLDER = '/01_data_sources'
+    CACHE OFF
+    TIMETOLIVEINCACHE DEFAULT
+    ADD SEARCHMETHOD ds_emp(
+        I18N au_est
+        CONSTRAINTS (
+             ADD empno (any) OPT ANY
+             ADD ename (any) OPT ANY
+             ADD job (any) OPT ANY
+             ADD mgr (any) OPT ANY
+             ADD hiredate (any) OPT ANY
+             ADD sal (any) OPT ANY
+             ADD comm (any) OPT ANY
+             ADD deptno (any) OPT ANY
+        )
+        OUTPUTLIST (comm, deptno, empno, ename, hiredate, job, mgr, sal
+        )
+        WRAPPER (df ds_emp)
+    );
+

@@ -1,0 +1,8 @@
+﻿# REQUIRES-PROPERTIES-FILE - # Do not remove this comment!
+CREATE OR REPLACE DATASOURCE DF ds_emp
+    FOLDER = '/01_data_sources'
+    ROUTE LOCAL 'LocalConnection' '${databases.vcs_dp3.folder.01_data_sources.datasources.df.ds_emp.ROUTE.LOCAL.PATH}'
+    COLUMNDELIMITER = ','
+    ENDOFLINEDELIMITER = '\n'
+    HEADER = TRUE;
+
